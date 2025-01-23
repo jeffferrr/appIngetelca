@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,14 +7,39 @@ import {
   StyleSheet,
   Alert,
   Image,
+  Dimensions,
   Animated,
-  Easing,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  SafeAreaView,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function LoginScreen() {
+const LoginInicial = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [buttonScale] = useState(new Animated.Value(1)); // Para animación del botón
+  const navigation = useNavigation();
+  const fadeAnim = new Animated.Value(0);
+  const slideAnim = new Animated.Value(0);
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.spring(slideAnim, {
+        toValue: 1,
+        tension: 20,
+        friction: 7,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []);
 
   const handleLogin = () => {
     const fixedUsername = 'admin';
@@ -22,27 +47,10 @@ export default function LoginScreen() {
 
     if (username === fixedUsername && password === fixedPassword) {
       Alert.alert('¡Login exitoso!', `Bienvenido, ${username}`);
+      navigation.navigate('Home', { username: username });
     } else {
       Alert.alert('Error', 'Usuario o contraseña incorrectos');
     }
-  };
-
-  // Animación del botón al presionar
-  const animateButton = () => {
-    Animated.sequence([
-      Animated.timing(buttonScale, {
-        toValue: 0.9,
-        duration: 100,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }),
-      Animated.timing(buttonScale, {
-        toValue: 1,
-        duration: 100,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }),
-    ]).start(handleLogin);
   };
 
   const imageSource = {
@@ -50,86 +58,160 @@ export default function LoginScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={imageSource} style={styles.image} resizeMode="contain" />
-      <Text style={styles.title}>Iniciar Sesión</Text>
+    <View style={styles.mainContainer}>
+      <LinearGradient
+        colors={['#001f3f', '#003366', '#004080']}
+        style={styles.gradient}
+      >
+        <View style={styles.content}>
+          <View style={styles.logoWrapper}>
+            <Image source={imageSource} style={styles.image} resizeMode="contain" />
+          </View>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Usuario"
-        placeholderTextColor="#aaa"
-        value={username}
-        onChangeText={setUsername}
-      />
+          <View style={styles.formContainer}>
+            <Text style={styles.title}>Iniciar Sesión</Text>
+            <Text style={styles.subtitle}>Sistema de Gestión</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Contraseña"
-        placeholderTextColor="#aaa"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
+            <View style={styles.inputContainer}>
+              <MaterialIcons name="person" size={24} color="#4a90e2" style={styles.inputIcon} />
+              <TextInput
+                style={styles.input}
+                placeholder="Usuario"
+                placeholderTextColor="#8b9cb5"
+                value={username}
+                onChangeText={setUsername}
+                autoCapitalize="none"
+              />
+            </View>
 
-      <Animated.View style={{ transform: [{ scale: buttonScale }] }}>
-        <TouchableOpacity style={styles.button} onPress={animateButton}>
-          <Text style={styles.buttonText}>Entrar</Text>
-        </TouchableOpacity>
-      </Animated.View>
+            <View style={styles.inputContainer}>
+              <MaterialIcons name="lock" size={24} color="#4a90e2" style={styles.inputIcon} />
+              <TextInput
+                style={styles.input}
+                placeholder="Contraseña"
+                placeholderTextColor="#8b9cb5"
+                secureTextEntry
+                value={password}
+                onChangeText={setPassword}
+              />
+            </View>
+
+            <TouchableOpacity 
+              style={styles.loginButton}
+              onPress={handleLogin}
+              activeOpacity={0.8}
+            >
+              <LinearGradient
+                colors={['#4a90e2', '#357abd']}
+                style={styles.gradientButton}
+              >
+                <Text style={styles.loginButtonText}>INICIAR SESIÓN</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </LinearGradient>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
+    flex: 1,
+  },
+  gradient: {
+    flex: 1,
+  },
+  content: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
     padding: 20,
   },
+  logoWrapper: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
   image: {
-    width: 150,
-    height: 150,
-    marginBottom: 10,
+    width: Dimensions.get('window').width * 0.5,
+    height: Dimensions.get('window').width * 0.3,
+  },
+  formContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderRadius: 20,
+    padding: 20,
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#333',
+    color: '#001f3f',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 30,
+    textAlign: 'center',
+  },
+  inputContainer: {
+    marginBottom: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
+    borderRadius: 15,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderColor: '#e1e1e1',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  inputIcon: {
+    marginRight: 10,
   },
   input: {
-    width: '100%',
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    marginBottom: 15,
-    backgroundColor: '#fff',
-    elevation: 3, // Sombra en Android
-    shadowColor: '#000', // Sombra en iOS
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
+    flex: 1,
+    height: 55,
+    fontSize: 16,
+    color: '#333',
   },
-  button: {
-    width: '120%',
-    height: '180%',
-    backgroundColor: '#007BFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-    elevation: 5, // Sombra en Android
-    shadowColor: '#000', // Sombra en iOS
+  loginButton: {
+    marginTop: 20,
+    borderRadius: 15,
+    overflow: 'hidden',
+    shadowColor: "#4a90e2",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
     shadowOpacity: 0.3,
     shadowRadius: 5,
-    shadowOffset: { width: 0, height: 3 },
+    elevation: 8,
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
+  gradientButton: {
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loginButtonText: {
+    color: '#ffffff',
+    fontSize: 18,
     fontWeight: 'bold',
+    letterSpacing: 1,
   },
 });
+
+export default LoginInicial;
