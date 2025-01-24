@@ -6,22 +6,33 @@ import PerfilPersonal from '../perfil/perfilPersonal';
 
 const Drawer = createDrawerNavigator();
 
+/**
+ * Componente DrawerNavigator
+ * Configura el menú lateral de la aplicación con sus diferentes secciones
+ * Incluye:
+ * - Panel Principal: Dashboard principal de la aplicación
+ * - Perfil: Información del usuario actual
+ */
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
       screenOptions={{
+        // Configuración del estilo del encabezado
         headerStyle: {
           backgroundColor: '#001f3f',
         },
         headerTintColor: '#fff',
+        // Configuración del estilo del drawer
         drawerStyle: {
           backgroundColor: '#fff',
-          width: 280,
+          width: 280, // Ancho fijo del menú lateral
         },
+        // Colores para los items del menú
         drawerActiveTintColor: '#4a90e2',
         drawerInactiveTintColor: '#666',
       }}
     >
+      {/* Pantalla del Panel Principal */}
       <Drawer.Screen 
         name="Panel Principal" 
         component={MainContent}
@@ -31,6 +42,7 @@ const DrawerNavigator = () => {
           ),
         }}
       />
+      {/* Pantalla del Perfil */}
       <Drawer.Screen 
         name="Perfil" 
         component={PerfilPersonal}

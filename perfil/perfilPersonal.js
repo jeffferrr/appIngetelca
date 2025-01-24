@@ -7,26 +7,38 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 
+/**
+ * Componente PerfilPersonal
+ * Muestra la información del perfil del usuario
+ * @param {Object} route - Objeto de ruta que contiene parámetros de navegación
+ */
 const PerfilPersonal = ({ route }) => {
+  // Obtener el nombre de usuario de los parámetros de ruta o usar valor por defecto
   const { username } = route.params || { username: 'Usuario' };
   
   return (
     <View style={styles.container}>
+      {/* Fondo con gradiente */}
       <LinearGradient
         colors={['#001f3f', '#003366', '#004080']}
         style={styles.gradient}
       >
         <View style={styles.content}>
+          {/* Tarjeta de perfil */}
           <View style={styles.profileCard}>
+            {/* Ícono de usuario */}
             <MaterialIcons name="account-circle" size={80} color="#4a90e2" />
             <Text style={styles.profileName}>{username}</Text>
             <Text style={styles.profileRole}>Administrador</Text>
             
+            {/* Información de contacto */}
             <View style={styles.profileInfo}>
+              {/* Email */}
               <View style={styles.infoItem}>
                 <MaterialIcons name="email" size={24} color="#4a90e2" />
                 <Text style={styles.infoText}>admin@ingetelca.com</Text>
               </View>
+              {/* Teléfono */}
               <View style={styles.infoItem}>
                 <MaterialIcons name="phone" size={24} color="#4a90e2" />
                 <Text style={styles.infoText}>+502 1234-5678</Text>
@@ -39,6 +51,7 @@ const PerfilPersonal = ({ route }) => {
   );
 };
 
+// Estilos del componente
 const styles = StyleSheet.create({
   container: {
     flex: 1,

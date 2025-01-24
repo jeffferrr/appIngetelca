@@ -9,19 +9,28 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 
+/**
+ * Componente MainContent
+ * Muestra el panel de control principal con estadísticas y resumen
+ * @param {Object} route - Objeto de ruta que contiene parámetros de navegación
+ */
 const MainContent = ({ route }) => {
+  // Obtener el nombre de usuario de los parámetros de ruta o usar valor por defecto
   const { username } = route.params || { username: 'Usuario' };
   
+  // Configuración de la imagen del logo
   const imageSource = {
     uri: 'https://ingetelca.gt/wp-content/uploads/2011/07/logopeq.png',
   };
 
   return (
     <View style={styles.container}>
+      {/* Fondo con gradiente */}
       <LinearGradient
         colors={['#001f3f', '#003366', '#004080']}
         style={styles.gradient}
       >
+        {/* Encabezado con logo */}
         <View style={styles.header}>
           <Image 
             source={imageSource} 
@@ -30,18 +39,22 @@ const MainContent = ({ route }) => {
           />
         </View>
         
+        {/* Contenido principal */}
         <View style={styles.content}>
           <View style={styles.card}>
             <Text style={styles.welcomeText}>Panel de Control</Text>
             <Text style={styles.subtitle}>Sistema de Gestión Ingetelca</Text>
             
+            {/* Contenedor de estadísticas */}
             <View style={styles.statsContainer}>
+              {/* Estadística de pendientes */}
               <View style={styles.statItem}>
                 <MaterialIcons name="pending-actions" size={30} color="#4a90e2" />
                 <Text style={styles.statNumber}>12</Text>
                 <Text style={styles.statLabel}>Pendientes</Text>
               </View>
               
+              {/* Estadística de completados */}
               <View style={styles.statItem}>
                 <MaterialIcons name="done-all" size={30} color="#4a90e2" />
                 <Text style={styles.statNumber}>45</Text>
@@ -55,6 +68,7 @@ const MainContent = ({ route }) => {
   );
 };
 
+// Estilos del componente
 const styles = StyleSheet.create({
   container: {
     flex: 1,
