@@ -5,15 +5,10 @@ import {
   StyleSheet,
   Image,
   Dimensions,
-  TouchableOpacity,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const Drawer = createDrawerNavigator();
-
-// Componente para el contenido principal
 const MainContent = ({ route }) => {
   const { username } = route.params || { username: 'Usuario' };
   
@@ -57,77 +52,6 @@ const MainContent = ({ route }) => {
         </View>
       </LinearGradient>
     </View>
-  );
-};
-
-// Componente para el perfil del usuario
-const UserProfile = ({ route }) => {
-  const { username } = route.params || { username: 'Usuario' };
-  
-  return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['#001f3f', '#003366', '#004080']}
-        style={styles.gradient}
-      >
-        <View style={styles.content}>
-          <View style={styles.profileCard}>
-            <MaterialIcons name="account-circle" size={80} color="#4a90e2" />
-            <Text style={styles.profileName}>{username}</Text>
-            <Text style={styles.profileRole}>Administrador</Text>
-            
-            <View style={styles.profileInfo}>
-              <View style={styles.infoItem}>
-                <MaterialIcons name="email" size={24} color="#4a90e2" />
-                <Text style={styles.infoText}>admin@ingetelca.com</Text>
-              </View>
-              <View style={styles.infoItem}>
-                <MaterialIcons name="phone" size={24} color="#4a90e2" />
-                <Text style={styles.infoText}>+502 1234-5678</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </LinearGradient>
-    </View>
-  );
-};
-
-// Componente principal que contiene el Drawer Navigator
-const PagInicial = () => {
-  return (
-    <Drawer.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#001f3f',
-        },
-        headerTintColor: '#fff',
-        drawerStyle: {
-          backgroundColor: '#fff',
-        },
-        drawerActiveTintColor: '#4a90e2',
-        drawerInactiveTintColor: '#666',
-      }}
-    >
-      <Drawer.Screen 
-        name="Panel Principal" 
-        component={MainContent}
-        options={{
-          drawerIcon: ({color}) => (
-            <MaterialIcons name="dashboard" size={24} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen 
-        name="Perfil" 
-        component={UserProfile}
-        options={{
-          drawerIcon: ({color}) => (
-            <MaterialIcons name="person" size={24} color={color} />
-          ),
-        }}
-      />
-    </Drawer.Navigator>
   );
 };
 
@@ -194,38 +118,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
   },
-  profileCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    borderRadius: 20,
-    padding: 30,
-    alignItems: 'center',
-  },
-  profileName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#001f3f',
-    marginTop: 15,
-  },
-  profileRole: {
-    fontSize: 16,
-    color: '#4a90e2',
-    marginBottom: 20,
-  },
-  profileInfo: {
-    width: '100%',
-    marginTop: 20,
-  },
-  infoItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
-    paddingHorizontal: 20,
-  },
-  infoText: {
-    marginLeft: 15,
-    fontSize: 16,
-    color: '#666',
-  },
 });
 
-export default PagInicial;
+export default MainContent;

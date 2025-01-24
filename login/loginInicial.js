@@ -58,60 +58,67 @@ const LoginInicial = () => {
   };
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <LinearGradient
-        colors={['#001f3f', '#003366', '#004080']}
+        colors={['#001f3f', '#002b4d', '#003366']}
         style={styles.gradient}
       >
-        <View style={styles.content}>
-          <View style={styles.logoWrapper}>
-            <Image source={imageSource} style={styles.image} resizeMode="contain" />
-          </View>
+        <KeyboardAvoidingView 
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.keyboardView}
+        >
+          <ScrollView contentContainerStyle={styles.scrollView}>
+            <View style={styles.content}>
+              <View style={styles.logoWrapper}>
+                <Image source={imageSource} style={styles.image} resizeMode="contain" />
+              </View>
 
-          <View style={styles.formContainer}>
-            <Text style={styles.title}>Iniciar Sesión</Text>
-            <Text style={styles.subtitle}>Sistema de Gestión</Text>
+              <View style={styles.formContainer}>
+                <Text style={styles.title}>Bienvenido</Text>
+                <Text style={styles.subtitle}>Sistema de Gestión de Telecomunicaciones</Text>
 
-            <View style={styles.inputContainer}>
-              <MaterialIcons name="person" size={24} color="#4a90e2" style={styles.inputIcon} />
-              <TextInput
-                style={styles.input}
-                placeholder="Usuario"
-                placeholderTextColor="#8b9cb5"
-                value={username}
-                onChangeText={setUsername}
-                autoCapitalize="none"
-              />
+                <View style={styles.inputContainer}>
+                  <MaterialIcons name="person" size={24} color="#1a73e8" style={styles.inputIcon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Usuario"
+                    placeholderTextColor="#666"
+                    value={username}
+                    onChangeText={setUsername}
+                    autoCapitalize="none"
+                  />
+                </View>
+
+                <View style={styles.inputContainer}>
+                  <MaterialIcons name="lock" size={24} color="#1a73e8" style={styles.inputIcon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Contraseña"
+                    placeholderTextColor="#666"
+                    secureTextEntry
+                    value={password}
+                    onChangeText={setPassword}
+                  />
+                </View>
+
+                <TouchableOpacity 
+                  style={styles.loginButton}
+                  onPress={handleLogin}
+                  activeOpacity={0.8}
+                >
+                  <LinearGradient
+                    colors={['#1a73e8', '#1557b0']}
+                    style={styles.gradientButton}
+                  >
+                    <Text style={styles.loginButtonText}>Iniciar Sesión</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
             </View>
-
-            <View style={styles.inputContainer}>
-              <MaterialIcons name="lock" size={24} color="#4a90e2" style={styles.inputIcon} />
-              <TextInput
-                style={styles.input}
-                placeholder="Contraseña"
-                placeholderTextColor="#8b9cb5"
-                secureTextEntry
-                value={password}
-                onChangeText={setPassword}
-              />
-            </View>
-
-            <TouchableOpacity 
-              style={styles.loginButton}
-              onPress={handleLogin}
-              activeOpacity={0.8}
-            >
-              <LinearGradient
-                colors={['#4a90e2', '#357abd']}
-                style={styles.gradientButton}
-              >
-                <Text style={styles.loginButtonText}>INICIAR SESIÓN</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-          </View>
-        </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </LinearGradient>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -122,95 +129,88 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
   },
+  keyboardView: {
+    flex: 1,
+  },
+  scrollView: {
+    flexGrow: 1,
+  },
   content: {
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    maxWidth: 500,
+    width: '100%',
+    alignSelf: 'center',
   },
   logoWrapper: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 40,
   },
   image: {
-    width: Dimensions.get('window').width * 0.5,
-    height: Dimensions.get('window').width * 0.3,
+    width: Math.min(Dimensions.get('window').width * 0.5, 250),
+    height: Math.min(Dimensions.get('window').width * 0.3, 150),
   },
   formContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    borderRadius: 20,
-    padding: 20,
-    elevation: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.98)',
+    borderRadius: 12,
+    padding: 30,
+    elevation: 4,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#001f3f',
-    marginBottom: 10,
+    fontSize: 28,
+    fontWeight: '600',
+    color: '#1a1a1a',
+    marginBottom: 8,
     textAlign: 'center',
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 15,
     color: '#666',
-    marginBottom: 30,
+    marginBottom: 35,
     textAlign: 'center',
   },
   inputContainer: {
-    marginBottom: 25,
+    marginBottom: 20,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#f8f9fa',
-    borderRadius: 15,
+    borderRadius: 8,
     paddingHorizontal: 15,
     borderWidth: 1,
-    borderColor: '#e1e1e1',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    borderColor: '#e0e0e0',
+    height: 50,
   },
   inputIcon: {
-    marginRight: 10,
+    marginRight: 12,
   },
   input: {
     flex: 1,
-    height: 55,
-    fontSize: 16,
+    fontSize: 15,
     color: '#333',
   },
   loginButton: {
-    marginTop: 20,
-    borderRadius: 15,
+    marginTop: 25,
+    borderRadius: 8,
     overflow: 'hidden',
-    shadowColor: "#4a90e2",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 8,
   },
   gradientButton: {
-    padding: 15,
+    padding: 14,
     alignItems: 'center',
     justifyContent: 'center',
   },
   loginButtonText: {
     color: '#ffffff',
-    fontSize: 18,
-    fontWeight: 'bold',
-    letterSpacing: 1,
+    fontSize: 16,
+    fontWeight: '600',
+    letterSpacing: 0.5,
   },
 });
 
