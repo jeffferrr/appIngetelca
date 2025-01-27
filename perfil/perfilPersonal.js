@@ -3,9 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 /**
  * Componente PerfilPersonal
@@ -15,6 +17,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 const PerfilPersonal = ({ route }) => {
   // Obtener el nombre de usuario de los parámetros de ruta o usar valor por defecto
   const { username } = route.params || { username: 'Usuario' };
+  const navigation = useNavigation();
+
+  const handleLogout = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    });
+  };
   
   return (
     <View style={styles.container}>
@@ -44,6 +54,19 @@ const PerfilPersonal = ({ route }) => {
                 <Text style={styles.infoText}>+502 1234-5678</Text>
               </View>
             </View>
+
+            <TouchableOpacity 
+              style={styles.logoutButton}
+              onPress={handleLogout}
+            >
+              <LinearGradient
+                colors={['#dc3545', '#c82333']}
+                style={styles.logoutGradient}
+              >
+                <MaterialIcons name="logout" size={24} color="#fff" />
+                <Text style={styles.logoutText}>Cerrar Sesión</Text>
+              </LinearGradient>
+            </TouchableOpacity>
           </View>
         </View>
       </LinearGradient>
@@ -102,6 +125,32 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     fontSize: 16,
     color: '#666',
+  },
+  logoutButton: {
+    width: '100%',
+    marginTop: 30,
+    borderRadius: 8,
+    overflow: 'hidden',
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  logoutGradient: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 12,
+  },
+  logoutText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 10,
   },
 });
 

@@ -13,7 +13,10 @@ const Drawer = createDrawerNavigator();
  * - Panel Principal: Dashboard principal de la aplicación
  * - Perfil: Información del usuario actual
  */
-const DrawerNavigator = () => {
+const DrawerNavigator = ({ route }) => {
+  // Obtener los parámetros de la ruta inicial
+  const { username, permisos } = route.params || {};
+
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -36,6 +39,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen 
         name="Panel Principal" 
         component={MainContent}
+        initialParams={{ username, permisos }}
         options={{
           drawerIcon: ({color}) => (
             <MaterialIcons name="dashboard" size={24} color={color} />
@@ -46,6 +50,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen 
         name="Perfil" 
         component={PerfilPersonal}
+        initialParams={{ username, permisos }}
         options={{
           drawerIcon: ({color}) => (
             <MaterialIcons name="person" size={24} color={color} />

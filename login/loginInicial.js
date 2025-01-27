@@ -35,6 +35,20 @@ const LoginInicial = () => {
   const fadeAnim = new Animated.Value(0);
   const slideAnim = new Animated.Value(0);
 
+  // Usuarios de prueba con sus permisos
+  const users = {
+    admin: {
+      password: '12345',
+      permisos: ['ADMINISTRADOR'],
+      nombre: 'Administrador'
+    },
+    tecnico: {
+      password: '54321',
+      permisos: ['BODEGA', 'REPORTERIA_TECNICOS'],
+      nombre: 'Técnico Demo'
+    }
+  };
+
   /**
    * Efecto para ejecutar las animaciones al montar el componente
    * Combina fade in y slide up en paralelo
@@ -63,12 +77,21 @@ const LoginInicial = () => {
    * Muestra alertas según el resultado
    */
   const handleLogin = () => {
-    const fixedUsername = 'admin';
-    const fixedPassword = '12345';
+    const user = users[username.toLowerCase()];
+    console.log('Usuario encontrado:', user); // Debugging
 
-    if (username === fixedUsername && password === fixedPassword) {
-      Alert.alert('¡Login exitoso!', `Bienvenido, ${username}`);
-      navigation.navigate('Home', { username: username });
+    if (user && user.password === password) {
+      const navigationParams = {
+        username: user.nombre,
+        permisos: user.permisos
+      };
+      
+      console.log('Navegando con params:', navigationParams); // Debugging
+      
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Home', params: navigationParams }],
+      });
     } else {
       Alert.alert('Error', 'Usuario o contraseña incorrectos');
     }
