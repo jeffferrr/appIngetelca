@@ -3,126 +3,100 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
-  Dimensions,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 
-/**
- * Componente MainContent
- * Muestra el panel de control principal con estadísticas y resumen
- * @param {Object} navigation - Objeto de navegación
- * @param {Object} route - Objeto de ruta que contiene parámetros de navegación
- */
-const MainContent = ({ navigation, route }) => {
-  console.log('Route params completo:', route.params);
-  
-  const { username = 'Usuario', permisos = [] } = route.params || {};
-  
-  console.log('Username:', username);
-  console.log('Permisos recibidos:', permisos);
-
-  // Configuración de la imagen del logo
-  const imageSource = {
-    uri: 'https://ingetelca.gt/wp-content/uploads/2011/07/logopeq.png',
-  };
+const VistaPrincipalHA = ({ navigation, route }) => {
+  const { permisos = [] } = route.params || {};
 
   const menuItems = [
     { 
       id: 1, 
-      title: 'ASIGNACIÓN SUPERVISORES', 
-      icon: 'supervisor-account', 
+      title: 'ARCHIVO BUC', 
+      icon: 'folder-special', 
       color: '#4a90e2', 
-      route: 'Supervisores',
-      permiso: 'ASIGNACIÓN_SUPERVISORES'
+      route: 'ArchivoBUC',
+      permiso: 'ARCHIVO_BUC'
     },
     { 
       id: 2, 
-      title: 'REPORTERÍA TÉCNICOS', 
-      icon: 'assignment', 
+      title: 'ARCHIVO CORE', 
+      icon: 'folder-shared', 
       color: '#50c878', 
-      route: 'Reporteria',
-      permiso: 'REPORTERIA_TECNICOS'
+      route: 'ArchivoCORE',
+      permiso: 'ARCHIVO_CORE'
     },
     { 
       id: 3, 
-      title: 'HISTORIAL DE ARCHIVOS', 
-      icon: 'folder', 
+      title: 'ARCHIVO DENUNCIAS MUNICIPALES', 
+      icon: 'report', 
       color: '#f4a460', 
-      route: 'Historial',
-      permiso: 'ADMINISTRADOR'
+      route: 'ArchivoDenuncias',
+      permiso: 'ARCHIVO_DENUNCIAS'
     },
     { 
       id: 4, 
-      title: 'BODEGA', 
-      icon: 'inventory', 
+      title: 'ARCHIVO RUTAS PREVENTIVAS', 
+      icon: 'alt-route', 
       color: '#ba55d3', 
-      route: 'Bodega',
-      permiso: 'BODEGA'
+      route: 'ArchivoRutas',
+      permiso: 'ARCHIVO_RUTAS'
     },
     { 
       id: 5, 
-      title: 'GESTIÓN DE CAJA CHICA', 
-      icon: 'account-balance-wallet', 
+      title: 'DASHBOARD BUC', 
+      icon: 'dashboard', 
       color: '#ff7f50', 
-      route: 'CajaChica',
-      permiso: 'ADMINISTRADOR'
+      route: 'DashboardBUC',
+      permiso: 'DASHBOARD_BUC'
     },
     { 
       id: 6, 
-      title: 'ADMINISTRACIÓN', 
-      icon: 'business', 
+      title: 'DASHBOARD CORE', 
+      icon: 'router', 
       color: '#778899', 
-      route: 'Administracion',
-      permiso: 'ADMINISTRADOR'
+      route: 'DashboardCORE',
+      permiso: 'DASHBOARD_CORE'
     },
     { 
       id: 7, 
-      title: 'OTRAS FUNCIONES', 
-      icon: 'more-horiz', 
+      title: 'DASHBOARD RUTAS PREVENTIVAS', 
+      icon: 'timeline', 
       color: '#20b2aa', 
-      route: 'OtrasFunciones',
-      permiso: 'ADMINISTRADOR'
+      route: 'DashboardRutas',
+      permiso: 'DASHBOARD_RUTAS'
     },
     { 
       id: 8, 
-      title: 'CONFIGURACIÓN', 
-      icon: 'settings', 
+      title: 'DASHBOARD ATP', 
+      icon: 'analytics', 
       color: '#cd853f', 
-      route: 'Configuracion',
-      permiso: 'ADMINISTRADOR'
+      route: 'DashboardATP',
+      permiso: 'DASHBOARD_ATP'
     },
     { 
       id: 9, 
-      title: 'PRODUCTIVIDAD LABORAL', 
-      icon: 'trending-up', 
+      title: 'DASHBOARD DENUNCIAS', 
+      icon: 'assessment', 
       color: '#6a5acd', 
-      route: 'Productividad',
-      permiso: 'ADMINISTRADOR'
+      route: 'DashboardDenuncias',
+      permiso: 'DASHBOARD_DENUNCIAS'
     },
   ];
 
-  // Corregimos la lógica de filtrado
-  const menuFiltrado = menuItems.filter(item => {
-    console.log(`Checando ${item.title} - Permiso requerido: ${item.permiso}`);
-    if (permisos.includes('ADMINISTRADOR')) {
-      return true;
-    }
-    return permisos.includes(item.permiso);
-  });
-
-  console.log('Items filtrados:', menuFiltrado.map(item => item.title));
-  console.log('Cantidad de items filtrados:', menuFiltrado.length);
+  const menuFiltrado = permisos.includes('ADMINISTRADOR') 
+    ? menuItems 
+    : menuItems.filter(item => permisos.includes(item.permiso));
 
   const screenWidth = Dimensions.get('window').width;
   const isTablet = screenWidth >= 768;
 
   return (
     <View style={styles.container}>
-      {/* Fondo con gradiente */}
       <LinearGradient
         colors={['#001f3f', '#003366', '#004080']}
         style={styles.gradient}
@@ -143,17 +117,7 @@ const MainContent = ({ navigation, route }) => {
                   styles.menuItem,
                   isTablet && styles.menuItemTablet
                 ]}
-                onPress={() => {
-                  if (item.title === 'ASIGNACIÓN SUPERVISORES') {
-                    navigation.navigate('Asignación Supervisores');
-                  } else if (item.title === 'REPORTERÍA TÉCNICOS') {
-                    navigation.navigate('Reportería Técnicos');
-                  } else if (item.title === 'HISTORIAL DE ARCHIVOS') {
-                    navigation.navigate('Historial de Archivos');
-                  } else {
-                    navigation.navigate(item.route);
-                  }
-                }}
+                onPress={() => navigation.navigate(item.route)}
               >
                 <LinearGradient
                   colors={[item.color, item.color + 'dd']}
@@ -174,7 +138,6 @@ const MainContent = ({ navigation, route }) => {
   );
 };
 
-// Estilos del componente
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -237,4 +200,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainContent;
+export default VistaPrincipalHA;

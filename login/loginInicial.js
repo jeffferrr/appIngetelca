@@ -44,7 +44,7 @@ const LoginInicial = () => {
     },
     tecnico: {
       password: '54321',
-      permisos: ['BODEGA', 'REPORTERIA_TECNICOS'],
+      permisos: ['REPORTERIA_TECNICOS', 'ASIGNACIÓN_SUPERVISORES', 'ASIGNACION_BUC', 'PLANTILLAS_RUTAS'],
       nombre: 'Técnico Demo'
     }
   };

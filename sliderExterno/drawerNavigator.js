@@ -3,6 +3,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialIcons } from '@expo/vector-icons';
 import MainContent from '../home/pagInicial';
 import PerfilPersonal from '../perfil/perfilPersonal';
+import VistaPrincipalAS from '../asignacionSupervisores/vistaPrincipalAS';
+import VistaPrincipalRT from '../reporteriaTecnicos/vistaPrincipalRT';
+import VistaPrincipalHA from '../historialDeArchivos/vistaPrincipalHA';
 
 const Drawer = createDrawerNavigator();
 
@@ -46,6 +49,15 @@ const DrawerNavigator = ({ route }) => {
           ),
         }}
       />
+      <Drawer.Screen 
+        name="Asignación Supervisores" 
+        component={VistaPrincipalAS}
+        initialParams={{ username, permisos }}
+        options={{
+          drawerItemStyle: { display: 'none' }, // Oculta el item del drawer
+          headerShown: true, // Mantiene el header para navegación
+        }}
+      />
       {/* Pantalla del Perfil */}
       <Drawer.Screen 
         name="Perfil" 
@@ -55,6 +67,24 @@ const DrawerNavigator = ({ route }) => {
           drawerIcon: ({color}) => (
             <MaterialIcons name="person" size={24} color={color} />
           ),
+        }}
+      />
+      <Drawer.Screen 
+        name="Reportería Técnicos" 
+        component={VistaPrincipalRT}
+        initialParams={{ username, permisos }}
+        options={{
+          drawerItemStyle: { display: 'none' },
+          headerShown: true,
+        }}
+      />
+      <Drawer.Screen 
+        name="Historial de Archivos" 
+        component={VistaPrincipalHA}
+        initialParams={{ username, permisos }}
+        options={{
+          drawerItemStyle: { display: 'none' },
+          headerShown: true,
         }}
       />
     </Drawer.Navigator>
