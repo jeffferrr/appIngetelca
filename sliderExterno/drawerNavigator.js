@@ -6,6 +6,7 @@ import PerfilPersonal from '../perfil/perfilPersonal';
 import VistaPrincipalAS from '../asignacionSupervisores/vistaPrincipalAS';
 import VistaPrincipalRT from '../reporteriaTecnicos/vistaPrincipalRT';
 import VistaPrincipalHA from '../historialDeArchivos/vistaPrincipalHA';
+import VistaPrincipalB from '../bodega/vistaPrincipalB';
 
 const Drawer = createDrawerNavigator();
 
@@ -81,6 +82,15 @@ const DrawerNavigator = ({ route }) => {
       <Drawer.Screen 
         name="Historial de Archivos" 
         component={VistaPrincipalHA}
+        initialParams={{ username, permisos }}
+        options={{
+          drawerItemStyle: { display: 'none' },
+          headerShown: true,
+        }}
+      />
+      <Drawer.Screen 
+        name="Bodega" 
+        component={VistaPrincipalB}
         initialParams={{ username, permisos }}
         options={{
           drawerItemStyle: { display: 'none' },
