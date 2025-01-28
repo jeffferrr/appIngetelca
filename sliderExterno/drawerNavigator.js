@@ -7,6 +7,8 @@ import VistaPrincipalAS from '../asignacionSupervisores/vistaPrincipalAS';
 import VistaPrincipalRT from '../reporteriaTecnicos/vistaPrincipalRT';
 import VistaPrincipalHA from '../historialDeArchivos/vistaPrincipalHA';
 import VistaPrincipalB from '../bodega/vistaPrincipalB';
+import SoliDispositivos from '../solicitudDispositivos/SoliDispositivos';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -97,6 +99,15 @@ const DrawerNavigator = ({ route }) => {
           headerShown: true,
         }}
       />
+            <Drawer.Screen 
+  name="Solicitud de Dispositivos" 
+  component={SoliDispositivos}
+  options={{
+    drawerIcon: ({color}) => (
+      <MaterialIcons name="devices" size={24} color={color} />
+    ),
+  }}
+/>
     </Drawer.Navigator>
   );
 };

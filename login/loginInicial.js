@@ -42,6 +42,11 @@ const LoginInicial = () => {
       permisos: ['ADMINISTRADOR'],
       nombre: 'Administrador'
     },
+    g: {
+      password: '1',
+      permisos: ['ADMINISTRADOR'],
+      nombre: 'Gadiel'
+    },
     tecnico: {
       password: '54321',
       permisos: ['REPORTERIA_TECNICOS', 'ASIGNACIÓN_SUPERVISORES', 'ASIGNACION_BUC', 'PLANTILLAS_RUTAS'],
