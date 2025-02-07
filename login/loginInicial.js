@@ -45,7 +45,7 @@ const LoginInicial = () => {
     g: {
       password: '1',
       permisos: ['ADMINISTRADOR'],
-      nombre: 'Gadiel'
+      nombre: 'Administrador G'
     },
     tecnico: {
       password: '54321',
