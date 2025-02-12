@@ -35,13 +35,7 @@ const LoginInicial = () => {
   const fadeAnim = new Animated.Value(0);
   const slideAnim = new Animated.Value(0);
 
-  // Usuarios de prueba con sus permisos
   const users = {
-    admin: {
-      password: '12345',
-      permisos: ['ADMINISTRADOR'],
-      nombre: 'Administrador'
-    },
     g: {
       password: '1',
       permisos: ['ADMINISTRADOR'],

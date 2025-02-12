@@ -7,7 +7,7 @@ import VistaPrincipalAS from '../asignacionSupervisores/vistaPrincipalAS';
 import VistaPrincipalRT from '../reporteriaTecnicos/vistaPrincipalRT';
 import VistaPrincipalHA from '../historialDeArchivos/vistaPrincipalHA';
 import VistaPrincipalB from '../bodega/vistaPrincipalB';
-import SoliDispositivos from '../SolicitudDispositivos/SoliDispositivos';
+import SoliDispositivos from '../solicitudDispositivos/SoliDispositivos';
 
 
 const Drawer = createDrawerNavigator();
