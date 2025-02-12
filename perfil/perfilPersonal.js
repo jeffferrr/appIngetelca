@@ -4,10 +4,12 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * Componente PerfilPersonal
@@ -19,11 +21,20 @@ const PerfilPersonal = ({ route }) => {
   const { username } = route.params || { username: 'Usuario' };
   const navigation = useNavigation();
 
-  const handleLogout = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Login' }],
-    });
+  const handleLogout = async () => {
+    try {
+      // Eliminar los datos de sesión
+      await AsyncStorage.removeItem('userSession');
+      
+      // Navegar al Login
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+    } catch (error) {
+      console.log('Error al cerrar sesión:', error);
+      Alert.alert('Error', 'No se pudo cerrar sesión');
+    }
   };
   
   return (

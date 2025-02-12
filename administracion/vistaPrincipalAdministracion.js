@@ -10,57 +10,41 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const VistaPrincipalRT = ({ navigation, route }) => {
+const VistaPrincipalAdministracion = ({ navigation, route }) => {
   const { permisos = [] } = route.params || {};
 
   const menuItems = [
     { 
       id: 1, 
-      title: 'PLANTILLAS BUC', 
-      icon: 'description', 
+      title: 'CONTROL DEL PERSONAL', 
+      icon: 'people', 
       color: '#4a90e2', 
-      route: 'PlantillasBUC',
-      permiso: 'PLANTILLAS_BUC'
+      route: 'ControlPersonal',
+      permiso: 'CONTROL_PERSONAL'
     },
     { 
       id: 2, 
-      title: 'PLANTILLAS CORE', 
-      icon: 'router', 
+      title: 'CONTROL DE HERRAMIENTAS', 
+      icon: 'build', 
       color: '#50c878', 
-      route: 'PlantillasCORE',
-      permiso: 'PLANTILLAS_CORE'
+      route: 'ControlHerramientas',
+      permiso: 'CONTROL_HERRAMIENTAS'
     },
     { 
       id: 3, 
-      title: 'PLANTILLAS DENUNCIAS', 
-      icon: 'report-problem', 
+      title: 'CONTROL DE TELEFONOS', 
+      icon: 'smartphone', 
       color: '#f4a460', 
-      route: 'PlantillasDenuncias',
-      permiso: 'PLANTILLAS_DENUNCIAS'
+      route: 'ControlTelefonos',
+      permiso: 'CONTROL_TELEFONOS'
     },
     { 
       id: 4, 
-      title: 'PLANTILLAS RUTAS PREVENTIVAS', 
-      icon: 'alt-route', 
+      title: 'CONTROL DE EQUIPOS', 
+      icon: 'computer', 
       color: '#ba55d3', 
-      route: 'PlantillasRutas',
-      permiso: 'PLANTILLAS_RUTAS'
-    },
-    { 
-      id: 5, 
-      title: 'PLANTILLAS FTTH', 
-      icon: 'settings-input-hdmi', 
-      color: '#ff7f50', 
-      route: 'PlantillasFTTH',
-      permiso: 'PLANTILLAS_FTTH'
-    },
-    { 
-      id: 6, 
-      title: 'PETICIONES INGENIERO', 
-      icon: 'engineering', 
-      color: '#9c27b0', 
-      route: 'PeticionesIngeniero',
-      permiso: 'PETICIONES_INGENIERO'
+      route: 'ControlEquipos',
+      permiso: 'CONTROL_EQUIPOS'
     },
   ];
 
@@ -176,4 +160,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VistaPrincipalRT;
+export default VistaPrincipalAdministracion;

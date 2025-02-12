@@ -1,9 +1,10 @@
 // Importaciones necesarias para la navegación y componentes principales
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginScreen from './login/loginInicial';
 import DrawerNavigator from './sliderExterno/drawerNavigator';
 
@@ -17,16 +18,44 @@ const Stack = createStackNavigator();
  * - Home: Navegador de drawer que contiene el panel principal y perfil
  */
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [userSession, setUserSession] = useState(null);
+
+  useEffect(() => {
+    checkSession();
+  }, []);
+
+  const checkSession = async () => {
+    try {
+      const sessionData = await AsyncStorage.getItem('userSession');
+      if (sessionData) {
+        setUserSession(JSON.parse(sessionData));
+      }
+    } catch (error) {
+      console.log('Error al recuperar la sesión:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) {
+    return null; // O un componente de loading
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName="Login"
+        initialRouteName={userSession ? "Home" : "Login"}
         screenOptions={{
           headerShown: false, // Oculta la barra de navegación superior
         }}
       >
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={DrawerNavigator} />
+        <Stack.Screen 
+          name="Home" 
+          component={DrawerNavigator}
+          initialParams={userSession}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

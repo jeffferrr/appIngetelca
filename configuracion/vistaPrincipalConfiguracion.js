@@ -10,57 +10,49 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const VistaPrincipalRT = ({ navigation, route }) => {
+const VistaPrincipalConfiguracion = ({ navigation, route }) => {
   const { permisos = [] } = route.params || {};
 
   const menuItems = [
     { 
       id: 1, 
-      title: 'PLANTILLAS BUC', 
-      icon: 'description', 
+      title: 'PERMISOS MENU', 
+      icon: 'security', 
       color: '#4a90e2', 
-      route: 'PlantillasBUC',
-      permiso: 'PLANTILLAS_BUC'
+      route: 'PermisosMenu',
+      permiso: 'PERMISOS_MENU'
     },
     { 
       id: 2, 
-      title: 'PLANTILLAS CORE', 
-      icon: 'router', 
+      title: 'USUARIOS', 
+      icon: 'people', 
       color: '#50c878', 
-      route: 'PlantillasCORE',
-      permiso: 'PLANTILLAS_CORE'
+      route: 'Usuarios',
+      permiso: 'USUARIOS'
     },
     { 
       id: 3, 
-      title: 'PLANTILLAS DENUNCIAS', 
-      icon: 'report-problem', 
+      title: 'AJUSTES GENERALES', 
+      icon: 'settings', 
       color: '#f4a460', 
-      route: 'PlantillasDenuncias',
-      permiso: 'PLANTILLAS_DENUNCIAS'
+      route: 'AjustesGenerales',
+      permiso: 'AJUSTES_GENERALES'
     },
     { 
       id: 4, 
-      title: 'PLANTILLAS RUTAS PREVENTIVAS', 
-      icon: 'alt-route', 
+      title: 'PERSONAL NUEVO DE CAJA CHICA', 
+      icon: 'person-add', 
       color: '#ba55d3', 
-      route: 'PlantillasRutas',
-      permiso: 'PLANTILLAS_RUTAS'
+      route: 'PersonalCajaChica',
+      permiso: 'PERSONAL_CAJA_CHICA'
     },
     { 
       id: 5, 
-      title: 'PLANTILLAS FTTH', 
-      icon: 'settings-input-hdmi', 
-      color: '#ff7f50', 
-      route: 'PlantillasFTTH',
-      permiso: 'PLANTILLAS_FTTH'
-    },
-    { 
-      id: 6, 
-      title: 'PETICIONES INGENIERO', 
+      title: 'PERSONAL NUEVO DE CAMPO', 
       icon: 'engineering', 
-      color: '#9c27b0', 
-      route: 'PeticionesIngeniero',
-      permiso: 'PETICIONES_INGENIERO'
+      color: '#ff7f50', 
+      route: 'PersonalCampo',
+      permiso: 'PERSONAL_CAMPO'
     },
   ];
 
@@ -176,4 +168,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VistaPrincipalRT;
+export default VistaPrincipalConfiguracion;

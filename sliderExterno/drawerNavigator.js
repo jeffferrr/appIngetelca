@@ -7,6 +7,10 @@ import VistaPrincipalAS from '../asignacionSupervisores/vistaPrincipalAS';
 import VistaPrincipalRT from '../reporteriaTecnicos/vistaPrincipalRT';
 import VistaPrincipalHA from '../historialDeArchivos/vistaPrincipalHA';
 import VistaPrincipalB from '../bodega/vistaPrincipalB';
+import VistaPrincipalCajaChica from '../gestionCajaChica/vistaPrincipalCajaChica';
+import VistaPrincipalAdministracion from '../administracion/vistaPrincipalAdministracion';
+import VistaPrincipalOF from '../otrasFunciones/vistaPrincipalOtrasFunciones';
+import VistaPrincipalConfiguracion from '../configuracion/vistaPrincipalConfiguracion';
 
 const Drawer = createDrawerNavigator();
 
@@ -95,6 +99,44 @@ const DrawerNavigator = ({ route }) => {
         options={{
           drawerItemStyle: { display: 'none' },
           headerShown: true,
+        }}
+      />
+      <Drawer.Screen 
+        name="Caja Chica" 
+        component={VistaPrincipalCajaChica}
+        initialParams={{ username, permisos }}
+        options={{
+          drawerItemStyle: { display: 'none' },
+          headerShown: true,
+        }}
+      />
+      <Drawer.Screen 
+        name="Administracion" 
+        component={VistaPrincipalAdministracion}
+        initialParams={{ username, permisos }}
+        options={{
+          drawerItemStyle: { display: 'none' },
+          headerShown: true,
+        }}
+      />
+      <Drawer.Screen 
+        name="OtrasFunciones" 
+        component={VistaPrincipalOF}
+        initialParams={{ username, permisos }}
+        options={{
+          drawerItemStyle: { display: 'none' },
+          headerShown: true,
+          title: 'Otras Funciones'
+        }}
+      />
+      <Drawer.Screen 
+        name="Configuracion" 
+        component={VistaPrincipalConfiguracion}
+        initialParams={{ username, permisos }}
+        options={{
+          drawerItemStyle: { display: 'none' },
+          headerShown: true,
+          title: 'Configuración'
         }}
       />
     </Drawer.Navigator>

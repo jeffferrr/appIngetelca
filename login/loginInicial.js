@@ -17,6 +17,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * Componente LoginInicial
@@ -76,22 +77,29 @@ const LoginInicial = () => {
    * Valida las credenciales contra valores fijos
    * Muestra alertas según el resultado
    */
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const user = users[username.toLowerCase()];
-    console.log('Usuario encontrado:', user); // Debugging
+    console.log('Usuario encontrado:', user);
 
     if (user && user.password === password) {
-      const navigationParams = {
+      const sessionData = {
         username: user.nombre,
         permisos: user.permisos
       };
-      
-      console.log('Navegando con params:', navigationParams); // Debugging
-      
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Home', params: navigationParams }],
-      });
+
+      try {
+        // Guardar los datos de sesión
+        await AsyncStorage.setItem('userSession', JSON.stringify(sessionData));
+        
+        // Navegar al Home
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home', params: sessionData }],
+        });
+      } catch (error) {
+        console.log('Error al guardar la sesión:', error);
+        Alert.alert('Error', 'No se pudo iniciar sesión');
+      }
     } else {
       Alert.alert('Error', 'Usuario o contraseña incorrectos');
     }

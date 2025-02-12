@@ -10,57 +10,49 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const VistaPrincipalRT = ({ navigation, route }) => {
+const VistaPrincipalCajaChica = ({ navigation, route }) => {
   const { permisos = [] } = route.params || {};
 
   const menuItems = [
     { 
       id: 1, 
-      title: 'PLANTILLAS BUC', 
-      icon: 'description', 
+      title: 'SOLICITUD CAJA CHICA', 
+      icon: 'request-quote', 
       color: '#4a90e2', 
-      route: 'PlantillasBUC',
-      permiso: 'PLANTILLAS_BUC'
+      route: 'SolicitudCajaChica',
+      permiso: 'SOLICITUD_CAJA_CHICA'
     },
     { 
       id: 2, 
-      title: 'PLANTILLAS CORE', 
-      icon: 'router', 
+      title: 'APROBACIÓN CAJA CHICA', 
+      icon: 'approval', 
       color: '#50c878', 
-      route: 'PlantillasCORE',
-      permiso: 'PLANTILLAS_CORE'
+      route: 'AprobacionCajaChica',
+      permiso: 'APROBACION_CAJA_CHICA'
     },
     { 
       id: 3, 
-      title: 'PLANTILLAS DENUNCIAS', 
-      icon: 'report-problem', 
+      title: 'REPORTES CAJA CHICA', 
+      icon: 'assessment', 
       color: '#f4a460', 
-      route: 'PlantillasDenuncias',
-      permiso: 'PLANTILLAS_DENUNCIAS'
+      route: 'ReportesCajaChica',
+      permiso: 'REPORTES_CAJA_CHICA'
     },
     { 
       id: 4, 
-      title: 'PLANTILLAS RUTAS PREVENTIVAS', 
-      icon: 'alt-route', 
+      title: 'DASHBOARD CAJA CHICA', 
+      icon: 'dashboard', 
       color: '#ba55d3', 
-      route: 'PlantillasRutas',
-      permiso: 'PLANTILLAS_RUTAS'
+      route: 'DashboardCajaChica',
+      permiso: 'DASHBOARD_CAJA_CHICA'
     },
     { 
       id: 5, 
-      title: 'PLANTILLAS FTTH', 
-      icon: 'settings-input-hdmi', 
+      title: 'APROBACIÓN DE DÍAS DOBLES', 
+      icon: 'event-available', 
       color: '#ff7f50', 
-      route: 'PlantillasFTTH',
-      permiso: 'PLANTILLAS_FTTH'
-    },
-    { 
-      id: 6, 
-      title: 'PETICIONES INGENIERO', 
-      icon: 'engineering', 
-      color: '#9c27b0', 
-      route: 'PeticionesIngeniero',
-      permiso: 'PETICIONES_INGENIERO'
+      route: 'AprobacionDiasDobles',
+      permiso: 'APROBACION_DIAS_DOBLES'
     },
   ];
 
@@ -176,4 +168,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VistaPrincipalRT;
+export default VistaPrincipalCajaChica;

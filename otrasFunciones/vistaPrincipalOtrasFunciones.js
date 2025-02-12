@@ -10,57 +10,41 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const VistaPrincipalRT = ({ navigation, route }) => {
+const VistaPrincipalOF = ({ navigation, route }) => {
   const { permisos = [] } = route.params || {};
 
   const menuItems = [
     { 
       id: 1, 
-      title: 'PLANTILLAS BUC', 
-      icon: 'description', 
+      title: 'CONTROL DE COMBUSTIBLE', 
+      icon: 'local-gas-station', 
       color: '#4a90e2', 
-      route: 'PlantillasBUC',
-      permiso: 'PLANTILLAS_BUC'
+      route: 'ControlCombustible',
+      permiso: 'CONTROL_COMBUSTIBLE'
     },
     { 
       id: 2, 
-      title: 'PLANTILLAS CORE', 
-      icon: 'router', 
+      title: 'BUSCADOR DE POSTES', 
+      icon: 'location-on', 
       color: '#50c878', 
-      route: 'PlantillasCORE',
-      permiso: 'PLANTILLAS_CORE'
+      route: 'BuscadorPostes',
+      permiso: 'BUSCADOR_POSTES'
     },
     { 
       id: 3, 
-      title: 'PLANTILLAS DENUNCIAS', 
-      icon: 'report-problem', 
+      title: 'BUSCADOR DE SITIOS', 
+      icon: 'place', 
       color: '#f4a460', 
-      route: 'PlantillasDenuncias',
-      permiso: 'PLANTILLAS_DENUNCIAS'
+      route: 'BuscadorSitios',
+      permiso: 'BUSCADOR_SITIOS'
     },
     { 
       id: 4, 
-      title: 'PLANTILLAS RUTAS PREVENTIVAS', 
-      icon: 'alt-route', 
+      title: 'BUSCADOR DE MATERIALES', 
+      icon: 'search', 
       color: '#ba55d3', 
-      route: 'PlantillasRutas',
-      permiso: 'PLANTILLAS_RUTAS'
-    },
-    { 
-      id: 5, 
-      title: 'PLANTILLAS FTTH', 
-      icon: 'settings-input-hdmi', 
-      color: '#ff7f50', 
-      route: 'PlantillasFTTH',
-      permiso: 'PLANTILLAS_FTTH'
-    },
-    { 
-      id: 6, 
-      title: 'PETICIONES INGENIERO', 
-      icon: 'engineering', 
-      color: '#9c27b0', 
-      route: 'PeticionesIngeniero',
-      permiso: 'PETICIONES_INGENIERO'
+      route: 'BuscadorMateriales',
+      permiso: 'BUSCADOR_MATERIALES'
     },
   ];
 
@@ -176,4 +160,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VistaPrincipalRT;
+export default VistaPrincipalOF;

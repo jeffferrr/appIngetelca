@@ -68,7 +68,7 @@ const MainContent = ({ navigation, route }) => {
       title: 'GESTIÓN DE CAJA CHICA', 
       icon: 'account-balance-wallet', 
       color: '#ff7f50', 
-      route: 'CajaChica',
+      route: 'Caja Chica',
       permiso: 'ADMINISTRADOR'
     },
     { 
@@ -152,6 +152,8 @@ const MainContent = ({ navigation, route }) => {
                     navigation.navigate('Historial de Archivos');
                   } else if (item.title === 'BODEGA') {
                     navigation.navigate('Bodega');
+                  } else if (item.title === 'GESTIÓN DE CAJA CHICA') {
+                    navigation.navigate('Caja Chica');
                   } else {
                     navigation.navigate(item.route);
                   }
